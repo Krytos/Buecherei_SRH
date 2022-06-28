@@ -1,23 +1,17 @@
-from sqlalchemy import create_engine, Column, String, Integer
+import db
+from sqlalchemy.orm import sessionmaker
+import random
 
-f_name = open("fname.txt", "r")
-s_name = open("sname.txt", "r")
-datenbank = open("bibliothek_projekt.sql", "r")
+Session = sessionmaker(bind=db.engine)
+session = Session()
 
-# for x in range(50):
-#     print(f"{f_name.readline(x)} {s_name.readline(x)}")
+f_name = open("fname.txt", "r")  # open file with first names
+s_name = open("sname.txt", "r")  # open file with last names
+strasse = open("strasse.txt", "r")  # open file with streets
 
-
-engine = create_engine('sqlite:///:memory:', echo=True)
-connection = engine.connect()
-result = engine.execute(datenbank.read())
-print(result)
-
-class bibliotheksbenutzer (base):
-    __tablename__ = "bibliotheksbenutzer"
-
-    ausweisID = Column(Integer)
-    name = Column(String)
-    nachname = Column(String)
-    straße = Column(String)
-    plz = Column(Integer)
+for x in range(2000):
+    plz = random.randint(10000, 99999)  # generate random PLZ
+    if session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == x).count() == 0:
+        test = db.Bibliotheksbenutzer(f"{x:08d}", f_name.readline()[:-2], s_name.readline()[:-2], strasse.readline()[:-2], plz)
+        session.add(test)
+        session.commit()
