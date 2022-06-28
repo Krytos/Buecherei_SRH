@@ -8,6 +8,7 @@ authors = ["mnitt <rolf.nibotski@gmail.com>"]
 python = "^3.10"
 requests = "^2.27.1"
 beautifulsoup4 = "^4.11.1"
+SQLAlchemy = "^1.4.39"
 
 [tool.poetry.dev-dependencies]
 
