@@ -65,6 +65,8 @@ def del_eintrag():
         print("Falsche Eingabe")
         add_eintrag()
 
+# Add auswahl
+
 def add_user():
     first_name = input("Vorname: ")
     last_name = input("Nachname: ")
@@ -118,6 +120,48 @@ def add_ausleih():
     session.commit()
 
   # Delete auswahl
+
+
+def del_user():
+    ausweisID = int(input("Ausweis ID: "))
+    if session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).count() == 1:
+        session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).delete()
+        session.commit()
+    else:
+        print("Ausweis ID ist nicht vorhanden.")
+
+def del_autor():
+    autorID = int(input("Autor ID: "))
+    if session.query(db.Autor).filter(db.Autor.autorID == autorID).count() == 1:
+        session.query(db.Autor).filter(db.Autor.autorID == autorID).delete()
+        session.commit()
+    else:
+        print("Autor ID ist nicht vorhanden.")
+
+
+def del_buch():
+    isbn = int(input("ISBN: "))
+    if session.query(db.Buch).filter(db.Buch.isbn == isbn).count() == 1:
+        session.query(db.Buch).filter(db.Buch.isbn == isbn).delete()
+        session.commit()
+    else:
+        print("ISBN ist nicht vorhanden.")
+
+def del_verlag():
+    verlagID = int(input("Verlag ID: "))
+    if session.query(db.Verlag).filter(db.Verlag.verlagID == verlagID).count() == 1:
+        session.query(db.Verlag).filter(db.Verlag.verlagID == verlagID).delete()
+        session.commit()
+    else:
+        print("Verlag ID ist nicht vorhanden.")
+
+def del_ausleih():
+    entleihe = int(input("Entleihe: "))
+    if session.query(db.Ausleihe).filter(db.Ausleihe.entleihe == entleihe).count() == 1:
+        session.query(db.Ausleihe).filter(db.Ausleihe.entleihe == entleihe).delete()
+        session.commit()
+    else:
+        print("Entleihe ist nicht vorhanden.")
 
 
 start()
