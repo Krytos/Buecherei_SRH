@@ -93,7 +93,7 @@ class Ausleihe (base):
 class Identifikation (base):
     __tablename__ = "identifikation"
 
-    autorid = Column(Integer, ForeignKey('autor.autorID'))
+    autorid = Column(Integer, ForeignKey('autor.autorID'), primary_key=True)
     isbn = Column(Integer, ForeignKey('buch.isbn'))
 
     def __init__(self, autorid, isbn):
