@@ -90,15 +90,15 @@ class Ausleihe (base):
         self.rückgabe = rückgabe
 
 
-class Identifikation (base):
-    __tablename__ = "identifikation"
-
-    autorid = Column(Integer, ForeignKey('autor.autorID'), primary_key=True)
-    isbn = Column(Integer, ForeignKey('buch.isbn'))
-
-    def __init__(self, autorid, isbn):
-        self.autorid = autorid
-        self.isbn = isbn
+# class Identifikation (base):
+#     __tablename__ = "identifikation"
+#
+#     autorid = Column(Integer, ForeignKey('autor.autorID'), primary_key=True)
+#     isbn = Column(Integer, ForeignKey('buch.isbn'))
+#
+#     def __init__(self, autorid, isbn):
+#         self.autorid = autorid
+#         self.isbn = isbn
 
 
 base.metadata.create_all(engine)  # create table if not exists

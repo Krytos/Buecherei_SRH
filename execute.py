@@ -12,7 +12,7 @@ def add_user():
     street = input("Straße: ")
     plz = int(input("PLZ: "))
     ausweisID = session.query(db.Bibliotheksbenutzer).order_by(db.Bibliotheksbenutzer.ausweisID.desc()).first()
-    ausweisID = ausweisID.ausweisID + 1
+    ausweisID = ausweisID.ausweisID + 1         # TODO Auto increment
     user = db.Bibliotheksbenutzer(ausweisID, first_name, last_name, street, plz)
     session.add(user)
     session.commit()
