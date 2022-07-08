@@ -12,6 +12,10 @@ def start():
         add_eintrag()
     elif answer == 2:
         del_eintrag()
+    elif answer == 3:
+        update_eintrag()
+    elif answer == 4:
+        search_eintrag()
 
 def add_eintrag():
     print("""
@@ -59,6 +63,54 @@ def del_eintrag():
         execute.del_user()
     else:
         print("Falsche Eingabe")
-        add_eintrag()
+        del_eintrag()
+
+def update_eintrag():
+    print("""
+    Bitte auswählen: 
+    1 - Autor ändern
+    2 - Buch ändern
+    3 - Verlag ändern
+    4 - Ausleihe ändern
+    5 - Nutzer ändern
+    """)
+    answer = int(input())
+    if answer == 1:
+        execute.update_autor()
+    elif answer == 2:
+        execute.update_buch()
+    elif answer == 3:
+        execute.update_verlag()
+    elif answer == 4:
+        execute.update_ausleih()
+    elif answer == 5:
+        execute.update_user()
+    else:
+        print("Falsche Eingabe")
+        update_eintrag()
+
+def search_eintrag():
+    print("""
+    Bitte auswählen: 
+    1 - Autor suchen
+    2 - Buch suchen
+    3 - Verlag suchen
+    4 - Ausleihe suchen
+    5 - Nutzer suchen
+    """)
+    answer = int(input())
+    if answer == 1:
+        execute.search_autor()
+    elif answer == 2:
+        execute.search_buch()
+    elif answer == 3:
+        execute.search_verlag()
+    elif answer == 4:
+        execute.search_ausleih()
+    elif answer == 5:
+        execute.search_user()
+    else:
+        print("Falsche Eingabe")
+        search_eintrag()
 
 start()

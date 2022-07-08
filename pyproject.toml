@@ -2,12 +2,11 @@
 name = "buecherei_srh"
 version = "0.1.0"
 description = ""
-authors = ["mnitt <rolf.nibotski@gmail.com>"]
+authors = ["Krytos <kmeinon@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = "^2.27.1"
-beautifulsoup4 = "^4.11.1"
+Flask = "^2.1.2"
 SQLAlchemy = "^1.4.39"
 
 [tool.poetry.dev-dependencies]

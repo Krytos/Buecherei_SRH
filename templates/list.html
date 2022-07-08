@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>SRH Bücherei</title>
+    <h1>SRH Bücherei</h1>
+    <form method="post">
+        Search: <input type="text" name="search" value="{{ search }}">
+        <input type="submit">
+    </form>
+    <p>
+        <table>
+            <tr>
+                <th>AusweisID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Stra0e</th>
+                <th>PLZ</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.ausweisID }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.nachname }}</td>
+                    <td>{{ user.strasse }}</td>
+                    <td>{{ user.plz }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </p>
+{% endblock %}

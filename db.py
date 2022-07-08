@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, Date
 from sqlalchemy.orm import declarative_base
 
-engine = create_engine('sqlite:///sqlalchemy.sqlite', echo=True)
+engine = create_engine('sqlite:///sqlalchemy.sqlite', echo=True, connect_args={'check_same_thread': False})
 connection = engine.connect()  # connect to database
 base = declarative_base()  # create base class
 
@@ -11,14 +11,14 @@ class Bibliotheksbenutzer (base):
     ausweisID = Column(Integer, primary_key=True)
     name = Column(String)
     nachname = Column(String)
-    straße = Column(String)
+    strasse = Column(String)
     plz = Column(Integer)
 
-    def __init__(self, ausweisID, name, nachname, straße, plz):
+    def __init__(self, ausweisID, name, nachname, strasse, plz):
         self.ausweisID = ausweisID
         self.name = name
         self.nachname = nachname
-        self.straße = straße
+        self.strasse = strasse
         self.plz = plz
 
 class Autor (base):
@@ -53,13 +53,13 @@ class Verlag (base):
 
     verlagID = Column(Integer, primary_key=True)
     telefonnummer = Column(Integer)
-    straße = Column(String)
+    strasse = Column(String)
     plz = Column(Integer)
 
-    def __init__(self, verlagID, telefonnummer, straße, plz):
+    def __init__(self, verlagID, telefonnummer, strasse, plz):
         self.verlagID = verlagID
         self.telefonnummer = telefonnummer
-        self.straße = straße
+        self.strasse = strasse
         self.plz = plz
 
 class Bücher (base):
