@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>SRH Bücherei</title>
+    {% if not auswahl %}
+        <form method="post">
+            <input type="submit" name="auswahl" value="Autor"><br>
+            <input type="submit" name="auswahl" value="Buch"><br>
+            <input type="submit" name="auswahl" value="Verlag"><br>
+            <input type="submit" name="auswahl" value="Ausleih"><br>
+            <input type="submit" name="auswahl" value="Nutzer"><br>
+        </form>
+    {% elif auswahl == "nutzer" %}
+        <form method="post">
+            Search: <input type="text" name="search">
+            <input type="hidden" name="auswahl" value="nutzer">
+            <input type="submit">
+        </form>
+        {% if users %}
+        <p>
+            <table>
+                <tr>
+                    <th>AusweisID</th>
+                    <th>Vorname</th>
+                    <th>Nachname</th>
+                    <th>Stra0e</th>
+                    <th>PLZ</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.ausweisID }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.nachname }}</td>
+                        <td>{{ user.strasse }}</td>
+                        <td>{{ user.plz }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </p>
+        {% endif %}
+    {% elif auswahl == "buch" %}
+        <form method="post">
+            Search: <input type="text" name="search">
+            <input type="hidden" name="auswahl" value="buch">
+            <input type="submit">
+        </form>
+        {% if books %}
+        <p>
+            <table>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Titel</th>
+                    <th>Autor</th>
+                    <th>Verlag</th>
+                    <th>Genre</th>
+                </tr>
+                {% for buch in books %}
+                    <tr>
+                        <td>{{ buch.isbn }}</td>
+                        <td>{{ buch.titel }}</td>
+                        <td>{{ buch.autor }}</td>
+                        <td>{{ buch.verlag }}</td>
+                        <td>{{ buch.genre }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </p>
+        {% endif %}
+    {% elif auswahl == "verlag" %}
+        <form method="post">
+            Search: <input type="text" name="search">
+            <input type="hidden" name="auswahl" value="verlag">
+            <input type="submit">
+        </form>
+        {% if publishers %}
+        <p>
+            <table>
+                <tr>
+                    <th>VerlagID</th>
+                    <th>Name</th>
+                    <th>Stra0e</th>
+                    <th>PLZ</th>
+                </tr>
+                {% for publisher in publishers %}
+                    <tr>
+                        <td>{{ publisher.verlagID }}</td>
+                        <td>{{ publisher.name }}</td>
+                        <td>{{ publisher.strasse }}</td>
+                        <td>{{ publisher.plz }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

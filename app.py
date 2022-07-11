@@ -32,12 +32,20 @@ def add():
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
-    if request.method == "POST":
-        search = request.form.get("search")
-        users = execute.search_user(search)
-        return render_template('list.html', users=users)
+    auswahl = request.form.get("auswahl")
+    search = request.form.get("search")
+
+    if str(auswahl).lower() == "nutzer":
+        if search:
+            return render_template("search.html", auswahl=auswahl.lower(), users=execute.search_user(search))
+        return render_template("search.html", auswahl=auswahl.lower())
+    elif str(auswahl).lower() == "buch":
+        if search:
+            return render_template("search.html", auswahl=auswahl.lower(), books=execute.search_book(search))
+        return render_template("search.html", auswahl=auswahl.lower())
     else:
-        return render_template('search.html')
+        return render_template("search.html")
+
 
 if __name__ == '__main__':
     app.run()

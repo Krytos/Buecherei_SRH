@@ -163,10 +163,13 @@ def update_ausleih():
 
 def search_user(search):
     nutzer = db.Bibliotheksbenutzer
-    # if session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).count() == 1:
-        # user = session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).all()
     user = session.query(nutzer).filter(or_(nutzer.name.like(search), nutzer.nachname.like(search),
                                             nutzer.ausweisID.like(search))).all()
     return user
     # else:
     #     print("Ausweis ID ist nicht vorhanden.")
+
+def search_book(search):
+    buch = db.Buch
+    book = session.query(buch).filter(or_(buch.titel.like(search), buch.isbn.like(search), buch.genre.like(search))).all()
+    return book

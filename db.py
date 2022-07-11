@@ -40,13 +40,13 @@ class Buch (base):
     isbn = Column(Integer, primary_key=True)
     verlagID = Column(Integer, ForeignKey('verlag.verlagID'))
     titel = Column(String)
-    kategorie = Column(String)
+    genre = Column(String)
 
-    def __init__(self, isbn, verlagID, titel, kategorie):
+    def __init__(self, isbn, verlagID, titel, genre):
         self.isbn = isbn
         self.verlagID = verlagID
         self.titel = titel
-        self.kategorie = kategorie
+        self.genre = genre
 
 class Verlag (base):
     __tablename__ = "verlag"
