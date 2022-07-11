@@ -6,24 +6,25 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    test = request.form.get("auswahl")
-    if test is None:
+    auswahl = request.form.get("auswahl")
+    if auswahl is None:
         return render_template('index.html')
-    elif test.lower() == "add":
-        return render_template('add.html')
-    elif test.lower() == "delete":
+    elif auswahl.lower() == "add":
+        return redirect(url_for('add'))
+    elif auswahl.lower() == "delete":
         return render_template('delete.html')
-    elif test.lower() == "edit":
+    elif auswahl.lower() == "edit":
         return render_template('edit.html')
-    elif test.lower() == "search":
+    elif auswahl.lower() == "search":
         return redirect(url_for('search'))
 
 @app.route('/add', methods=["GET", "POST"])
 def add():
-    if request.method == "POST":
-        return render_template('add.html')
+    auswahl = request.form.get("auswahl")
+    if auswahl is None:
+        return render_template("add.html")
     else:
-        return render_template('add.html')
+        return render_template("add.html", auswahl=auswahl)
 
 # @app.route('/delete', methods=["GET", "POST"])
 #

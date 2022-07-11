@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>Was möchten Sie hinzufügen?</title>
+    {% if not auswahl %}
+        <form method="post">
+            <input type="submit" name="auswahl" value="Autor"><br>
+            <input type="submit" name="auswahl" value="Buch"><br>
+            <input type="submit" name="auswahl" value="Verlag"><br>
+            <input type="submit" name="auswahl" value="Ausleih"><br>
+            <input type="submit" name="auswahl" value="Nutzer"><br>
+        </form>
+    {% endif %}
+    {% if auswahl == "Autor" %}
+        <form method="post">
+            <input type="text" name="name" placeholder="Name"><br>
+            <input type="text" name="vorname" placeholder="Vorname"><br>
+            <input type="submit" name="add" value="Hinzufügen">
+        </form>
+    {% endif %}
+    {% if auswahl == "Buch" %}
+        <form method="post">
+            <input type="text" name="titel" placeholder="Titel"><br>
+            <input type="text" name="isbn" placeholder="ISBN"><br>
+            <input type="text" name="verlag" placeholder="Verlag"><br>
+            <input type="text" name="autor" placeholder="Autor"><br>
+            <input type="submit" name="add" value="Hinzufügen">
+        </form>
+    {% endif %}
+    {% if auswahl == "Ausleih" %}
+        <form method="post">
+            <input type="date" name="frist" placeholder="Frist"><br>
+            <input type="text" name="buchid" placeholder="Buch-ID"><br>
+            <input type="text" name="ausweisid" placeholder="Ausweis Nr."><br>
+            <input type="text" name="rueckgabe" placeholder="Rückgabe"><br>
+            <input type="submit" name="add" value="Hinzufügen">
+        </form>
+    {% endif %}
+    {% if auswahl == "Nutzer" %}
+        <form method="post">
+            <input type="text" name="vorname" placeholder="Vorname"><br>
+            <input type="text" name="nachname" placeholder="Nachname"><br>
+            <input type="text" name="strasse" placeholder="Strasse"><br>
+            <input type="text" name="plz" placeholder="PLZ"><br>
+            <input type="submit" name="add" value="Hinzufügen">
+        </form>
+    {% endif %}
+
+{% endblock %}
