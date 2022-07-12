@@ -2,6 +2,8 @@ import db
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import or_
 
+
+
 Session = sessionmaker(bind=db.engine)
 session = Session()
 
@@ -62,13 +64,10 @@ def add_ausleih():
   # Delete auswahl
 
 
-def del_user():
-    ausweisID = int(input("Ausweis ID: "))
+def del_user(ausweisID):
     if session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).count() == 1:
         session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).delete()
         session.commit()
-    else:
-        print("Ausweis ID ist nicht vorhanden.")
 
 def del_autor():
     autorID = int(input("Autor ID: "))
@@ -178,5 +177,5 @@ def search_book(search):
 
 def get_all_users():
     nutzer = db.Bibliotheksbenutzer
-    user = session.query(nutzer).all()
+    user = session.query(nutzer)
     return user

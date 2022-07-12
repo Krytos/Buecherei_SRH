@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
+    max-width: 60%;
+    margin: auto;
 }
 
 .header {

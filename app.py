@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, session
+from flask_paginate import Pagination, get_page_args, get_page_parameter
 import execute
 
 app = Flask(__name__)
@@ -28,14 +29,20 @@ def add():
 
 @app.route('/nutzer', methods=["GET", "POST"])
 def nutzer():
-    users = execute.get_all_users()
-    entries = len(users)
-    pages = [x for x in range(entries // 50 + 1)]
-    if request.form.get("cpage") is not None:
-        cpage = int(request.form.get("cpage"))
-    else:
-        cpage = 1
-    return render_template("nutzer.html", users=users, pages=pages, entries=entries, cpage=cpage)
+    action = request.form.get("action")
+    id = request.form.get("id")
+    if action == "Delete":
+        execute.del_user(id)
+    # if action == "Edit":
+        # execute.update_user(id)
+
+    total = execute.get_all_users().all()
+    page = int(request.args.get('page', 1))
+    per_page = 25
+    offset = (page - 1) * per_page
+    users = execute.get_all_users().limit(per_page).offset(offset)
+    pagination = Pagination(page=page, total=len(total), record_name='users', per_page=per_page, bs_version=4, offset=offset)
+    return render_template("nutzer.html", users=users, pagination=pagination)
 
 @app.route('/buch', methods=["GET", "POST"])
 def buch():

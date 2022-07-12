@@ -1,44 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-{% if pages[1] %}
-<form class="page__box" method="post">
-    <div class="pagination__button">
-        <button name="cpage" value="0"><<</button>
-        <button name="cpage" value="-1"><</button>
-        <button name="cpage" value="1">></button>
-        <button name="cpage" value="{{ pages }}">>></button>
-    </div>
-    <ul class="pagination">
-        <div class="pagination_pages">
-            {% for page in pages[cpage-5:cpage] %}
-                <li><a href="#">{{ page }}</a></li>
-            {% endfor %}
-                <li><a href="#"> - {{ cpage }} - </a></li>
-            {% for page in pages[cpage+1:cpage+5] %}
-                <li><a href="#">{{ page }}</a></li>
-            {% endfor %}
-        </div>
-    </ul>
+{{ pagination.links }}
+<form method="post">
+    <table  class="table table-striped">
+        <tr>
+            <th>#</th>
+            <th>AusweisID</th>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Stra0e</th>
+            <th>PLZ</th>
+            <th>Actions:</th>
+        </tr>
+        {% for user in users %}
+
+        <tr>
+            <td>{{ loop.index + pagination.skip }}</td>
+            <td>{{ user.ausweisID }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.nachname }}</td>
+            <td>{{ user.strasse }}</td>
+            <td>{{ user.plz }}</td>
+            <td>
+                <input class="btn btn-primary" name="action" type="submit" value="Edit">
+                <input class="btn btn-primary" name="action" type="submit" value="Delete">
+                <input type="hidden" name="id" value="{{ user.ausweisID }}">
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </form>
-{% endif %}
-    <p>
-        <table>
-            <tr>
-                <th>AusweisID</th>
-                <th>Vorname</th>
-                <th>Nachname</th>
-                <th>Stra0e</th>
-                <th>PLZ</th>
-            </tr>
-            {% for x in range(50) %}
-            <tr>
-                <td>{{ users[x].ausweisID }}</td>
-                <td>{{ users[x].name }}</td>
-                <td>{{ users[x].nachname }}</td>
-                <td>{{ users[x].strasse }}</td>
-                <td>{{ users[x].plz }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </p>
+{{ pagination.links }}
 {% endblock %}

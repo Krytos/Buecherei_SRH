@@ -8,6 +8,7 @@ authors = ["Krytos <kmeinon@gmail.com>"]
 python = "^3.10"
 Flask = "^2.1.2"
 SQLAlchemy = "^1.4.39"
+flask-paginate = "^2022.1.8"
 
 [tool.poetry.dev-dependencies]
 
