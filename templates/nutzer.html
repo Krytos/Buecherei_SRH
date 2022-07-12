@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+{% if pages[1] %}
+<form class="page__box" method="post">
+    <div class="pagination__button">
+        <button name="cpage" value="0"><<</button>
+        <button name="cpage" value="-1"><</button>
+        <button name="cpage" value="1">></button>
+        <button name="cpage" value="{{ pages }}">>></button>
+    </div>
+    <ul class="pagination">
+        <div class="pagination_pages">
+            {% for page in pages[cpage-5:cpage] %}
+                <li><a href="#">{{ page }}</a></li>
+            {% endfor %}
+                <li><a href="#"> - {{ cpage }} - </a></li>
+            {% for page in pages[cpage+1:cpage+5] %}
+                <li><a href="#">{{ page }}</a></li>
+            {% endfor %}
+        </div>
+    </ul>
+</form>
+{% endif %}
+    <p>
+        <table>
+            <tr>
+                <th>AusweisID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Stra0e</th>
+                <th>PLZ</th>
+            </tr>
+            {% for x in range(50) %}
+            <tr>
+                <td>{{ users[x].ausweisID }}</td>
+                <td>{{ users[x].name }}</td>
+                <td>{{ users[x].nachname }}</td>
+                <td>{{ users[x].strasse }}</td>
+                <td>{{ users[x].plz }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </p>
+{% endblock %}

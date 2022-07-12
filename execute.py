@@ -173,3 +173,10 @@ def search_book(search):
     buch = db.Buch
     book = session.query(buch).filter(or_(buch.titel.like(search), buch.isbn.like(search), buch.genre.like(search))).all()
     return book
+
+# get all
+
+def get_all_users():
+    nutzer = db.Bibliotheksbenutzer
+    user = session.query(nutzer).all()
+    return user

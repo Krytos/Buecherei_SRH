@@ -8,11 +8,20 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <title>SRH Bücherei</title>
 </head>
-<body>
+<body class="body">
     {% block header %}
         <header class="header">
-            <img class="srh_logo" src="/static/img/srh_logo.png" alt="srh logo">
-            <a class="srh_link" href="{{ url_for('index') }}">SRH Bücherei</a>
+            <div class="navbar">
+                <div class="navbar__logo">
+                    <a href="{{ url_for('index') }}"><img class="srh_logo" src="/static/img/srh_logo.png" alt="srh logo"></a>
+                    <a class="link__no_dec srh_link" href="{{ url_for('index') }}">Bücherei</a>
+                </div>
+                <div class="navbar__links">
+                    <a class="link__no_dec navbar__links_link" href="{{ url_for('nutzer') }}">Nutzer</a>
+                    <a class="link__no_dec navbar__links_link" href="{{ url_for('buch') }}">Buch</a>
+                    <a class="link__no_dec navbar__links_link" href="{{ url_for('ausleih') }}">Ausleih</a>
+                </div>
+            </div>
         </header>
     {% endblock %}
     {% block content %}

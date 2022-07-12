@@ -26,16 +26,31 @@ def add():
     else:
         return render_template("add.html", auswahl=auswahl)
 
-# @app.route('/delete', methods=["GET", "POST"])
-#
-# @app.route('/edit', methods=["GET", "POST"])
+@app.route('/nutzer', methods=["GET", "POST"])
+def nutzer():
+    users = execute.get_all_users()
+    entries = len(users)
+    pages = [x for x in range(entries // 50 + 1)]
+    if request.form.get("cpage") is not None:
+        cpage = int(request.form.get("cpage"))
+    else:
+        cpage = 1
+    return render_template("nutzer.html", users=users, pages=pages, entries=entries, cpage=cpage)
+
+@app.route('/buch', methods=["GET", "POST"])
+def buch():
+    return render_template("buch.html")
+
+@app.route('/ausleih', methods=["GET", "POST"])
+def ausleih():
+    return render_template("ausleih.html")
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
     auswahl = request.form.get("auswahl")
     search = request.form.get("search")
 
-    if str(auswahl).lower() == "nutzer":
+    if str(auswahl).lower() == "nutzer.html":
         if search:
             return render_template("search.html", auswahl=auswahl.lower(), users=execute.search_user(search))
         return render_template("search.html", auswahl=auswahl.lower())
