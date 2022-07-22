@@ -104,14 +104,9 @@ def del_ausleih():
 
 # Update auswahl
 
-def update_user():
-    ausweisID = int(input("Ausweis ID: "))
+def update_user(name, nachname, strasse, plz, ausweisID):
     if session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).count() == 1:
-        first_name = input("Vorname: ")
-        last_name = input("Nachname: ")
-        street = input("strasse: ")
-        plz = int(input("PLZ: "))
-        session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).update({"first_name": first_name, "last_name": last_name, "street": street, "plz": plz})
+        session.query(db.Bibliotheksbenutzer).filter(db.Bibliotheksbenutzer.ausweisID == ausweisID).update({"name": name, "nachname": nachname, "strasse": strasse,  "plz": plz})
         session.commit()
     else:
         print("Ausweis ID ist nicht vorhanden.")

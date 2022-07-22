@@ -1,32 +1,130 @@
 {% extends "base.html" %}
 {% block content %}
-{{ pagination.links }}
-<form method="post">
-    <table  class="table table-striped">
-        <tr>
-            <th>AusweisID</th>
-            <th>Vorname</th>
-            <th>Nachname</th>
-            <th>Stra0e</th>
-            <th>PLZ</th>
-            <th>Actions:</th>
-        </tr>
-        {% for user in users %}
+<div class="container">
+  <div class="row">
+    <div class="col">
 
-        <tr class="nutzer__table_row">
-            <td>{{ user.ausweisID }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.nachname }}</td>
-            <td>{{ user.strasse }}</td>
-            <td>{{ user.plz }}</td>
-            <td>
-                <input class="btn btn-warning" name="action" type="submit" value="Edit">
-                <input class="btn btn-danger" name="action" type="submit" value="Delete">
-                <input type="hidden" name="id" value="{{ user.ausweisID }}">
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-</form>
-{{ pagination.links }}
+    </div>
+    <div class="col-6">
+      {{ pagination.links }}
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container-md">
+    <form method="post">
+        <table  class="table table-striped">
+            <tr>
+                <th>AusweisID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Stra0e</th>
+                <th>PLZ</th>
+                <th>Actions:</th>
+            </tr>
+            {% for user in users %}
+
+            <tr class="nutzer__table_row">
+                <td>{{ user.ausweisID }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.nachname }}</td>
+                <td>{{ user.strasse }}</td>
+                <td>{{ user.plz }}</td>
+                <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="{{ user.ausweisID }}"
+                    data-bs-name="{{ user.name }}" data-bs-nachname="{{ user.nachname }}" data-bs-strasse="{{ user.strasse }}" data-bs-plz="{{ user.plz }}">
+                      Edit
+                    </button>
+                    <input class="btn btn-danger" name="action" type="submit" value="Delete">
+                    <input type="hidden" name="id" value="{{ user.ausweisID }}">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col-6">
+      {{ pagination.links }}
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+</div>
+    <form method="post">
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3 name">
+                    <label for="vorame" class="col-form-label">Vorame:</label>
+                    <input name="edit" type="text" class="form-control" id="vorame">
+                  </div>
+                  <div class="mb-3 nachname">
+                    <label for="nachname" class="col-form-label">Nachname:</label>
+                    <input name="edit" type="text" class="form-control" id="nachname">
+                  </div>
+                  <div class="mb-3 strasse">
+                    <label for="strasse" class="col-form-label">Strasse:</label>
+                    <input name="edit" type="text" class="form-control" id="strasse">
+                  </div>
+                  <div class="mb-3 plz">
+                    <label for="plz" class="col-form-label">PLZ:</label>
+                    <input name="edit" type="text" class="form-control" id="plz">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" name="edit" class="btn btn-primary sub">Edit!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+    <script>
+        var editModal = document.getElementById('editModal')
+        editModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var user_id = button.getAttribute('data-bs-id')
+            var user_name = button.getAttribute('data-bs-name')
+            var user_nachname = button.getAttribute('data-bs-nachname')
+            var user_strasse = button.getAttribute('data-bs-strasse')
+            var user_plz = button.getAttribute('data-bs-plz')
+            // If necessary, you could initiate an AJAX request here
+            // and then do the updating in a callback.
+            //
+            // Update the modal's content.
+            var modalTitle = editModal.querySelector('.modal-title')
+            var modalBodyId = editModal.querySelector('.sub')
+            var modalBodyName = editModal.querySelector('.name input')
+            var modalBodyNachname = editModal.querySelector('.nachname input')
+            var modalBodyStrasse = editModal.querySelector('.strasse input')
+            var modalBodyPlz = editModal.querySelector('.plz input')
+
+            modalTitle.textContent = 'Eintrag für ' + user_name + ' ' + user_nachname + ' editieren.'
+            modalBodyId.value = user_id
+            modalBodyName.value = user_name
+            modalBodyNachname.value = user_nachname
+            modalBodyStrasse.value = user_strasse
+            modalBodyPlz.value = user_plz
+        })
+    </script>
 {% endblock %}
