@@ -43,7 +43,15 @@ def nutzer():
 
 @app.route('/buch', methods=["GET", "POST"])
 def buch():
-    return render_template("buch.html")
+    action = request.form.get("action")
+    edit = request.form.getlist("edit")
+    id = request.form.get("id")
+    if action == "Delete":
+        execute.del_buch(id)
+    if edit:
+        execute.update_buch(edit[0], edit[1], edit[2], edit[3])
+    books, pagination = paginate(execute.get_all_books())
+    return render_template("buch.html", books=books, pagination=pagination)
 
 @app.route('/ausleih', methods=["GET", "POST"])
 def ausleih():

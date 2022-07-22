@@ -78,8 +78,7 @@ def del_autor():
         print("Autor ID ist nicht vorhanden.")
 
 
-def del_buch():
-    isbn = int(input("ISBN: "))
+def del_buch(isbn):
     if session.query(db.Buch).filter(db.Buch.isbn == isbn).count() == 1:
         session.query(db.Buch).filter(db.Buch.isbn == isbn).delete()
         session.commit()
@@ -121,13 +120,9 @@ def update_autor():
     else:
         print("Autor ID ist nicht vorhanden.")
 
-def update_buch():
-    isbn = int(input("ISBN: "))
+def update_buch(isbn, verlagid, titel, genre):
     if session.query(db.Buch).filter(db.Buch.isbn == isbn).count() == 1:
-        verlagid = int(input("Verlag ID: "))
-        titel = input("Titel: ")
-        kategorie = input("Kategorie: ")
-        session.query(db.Buch).filter(db.Buch.isbn == isbn).update({"verlagid": verlagid, "titel": titel, "kategorie": kategorie})
+        session.query(db.Buch).filter(db.Buch.isbn == isbn).update({"isbn": isbn, "verlagID": verlagid, "titel": titel, "genre": genre})
         session.commit()
     else:
         print("ISBN ist nicht vorhanden.")
@@ -171,6 +166,7 @@ def search_book(search):
 # get all
 
 def get_all_users():
-    nutzer = db.Bibliotheksbenutzer
-    user = session.query(nutzer)
-    return user
+    return session.query(db.Bibliotheksbenutzer)
+
+def get_all_books():
+    return session.query(db.Buch)

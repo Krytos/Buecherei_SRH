@@ -1,4 +1,125 @@
 {% extends "base.html" %}
 {% block content %}
-    
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col-6">
+      {{ pagination.links }}
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container-md">
+    <form method="post">
+        <table  class="table table-striped">
+            <tr>
+                <th>ISBN</th>
+                <th>Verlag-ID</th>
+                <th>Titel</th>
+                <th>Genre</th>
+                <th>Actions:</th>
+            </tr>
+            {% for book in books %}
+
+            <tr class="nutzer__table_row">
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.verlagID }}</td>
+                <td>{{ book.titel }}</td>
+                <td>{{ book.genre }}</td>
+                <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-isbn="{{ book.isbn }}"
+                    data-bs-verlagid="{{ book.verlagID }}" data-bs-titel="{{ book.titel }}" data-bs-genre="{{ book.genre }}">
+                      Edit
+                    </button>
+                    <input class="btn btn-danger" name="action" type="submit" value="Delete">
+                    <input type="hidden" name="id" value="{{ book.isbn }}">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col-6">
+      {{ pagination.links }}
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+</div>
+    <form method="post">
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3 isbn">
+                    <label for="isbn" class="col-form-label">ISBN:</label>
+                    <input name="edit" type="text" class="form-control" id="isbn">
+                  </div>
+                  <div class="mb-3 verlagid">
+                    <label for="verlagid" class="col-form-label">Verlag ID:</label>
+                    <input name="edit" type="text" class="form-control" id="verlagid">
+                  </div>
+                  <div class="mb-3 titel">
+                    <label for="titel" class="col-form-label">Titel:</label>
+                    <input name="edit" type="text" class="form-control" id="titel">
+                  </div>
+                  <div class="mb-3 genre">
+                    <label for="genre" class="col-form-label">Genre:</label>
+                    <input name="edit" type="text" class="form-control" id="genre">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" name="edit" class="btn btn-primary sub">Edit!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+    <script>
+        var editModal = document.getElementById('editModal')
+        editModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var book_isbn = button.getAttribute('data-bs-isbn')
+            var book_verlagid = button.getAttribute('data-bs-verlagid')
+            var book_titel = button.getAttribute('data-bs-titel')
+            var book_genre = button.getAttribute('data-bs-genre')
+            // If necessary, you could initiate an AJAX request here
+            // and then do the updating in a callback.
+            //
+            // Update the modal's content.
+            var modalTitle = editModal.querySelector('.modal-title')
+            var modalBodyISBN = editModal.querySelector('.isbn input')
+            var modalBodyVerlag = editModal.querySelector('.verlagid input')
+            var modalBodyTitel = editModal.querySelector('.titel input')
+            var modalBodyGenre = editModal.querySelector('.genre input')
+
+            modalTitle.textContent = 'Eintrag für ' + book_titel  + ' editieren.'
+            modalBodyISBN.value = book_isbn
+            modalBodyVerlag.value = book_verlagid
+            modalBodyTitel.value = book_titel
+            modalBodyGenre.value = book_genre
+        })
+    </script>
 {% endblock %}
