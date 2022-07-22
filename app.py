@@ -19,6 +19,10 @@ def index():
     elif auswahl.lower() == "search":
         return redirect(url_for('search'))
 
+@app.route('/popup', methods=["GET", "POST"])
+def popup():
+    return render_template('popup.html')
+
 @app.route('/add', methods=["GET", "POST"])
 def add():
     auswahl = request.form.get("auswahl")
@@ -41,7 +45,7 @@ def nutzer():
     per_page = 25
     offset = (page - 1) * per_page
     users = execute.get_all_users().limit(per_page).offset(offset)
-    pagination = Pagination(page=page, total=len(total), record_name='users', per_page=per_page, bs_version=4, offset=offset)
+    pagination = Pagination(page=page, total=len(total), record_name='users', per_page=per_page, bs_version=5, offset=offset)
     return render_template("nutzer.html", users=users, pagination=pagination)
 
 @app.route('/buch', methods=["GET", "POST"])

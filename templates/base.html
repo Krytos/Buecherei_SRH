@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <link rel="icon" type="image/png" href="/static/img/srh_logo.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
     <title>SRH Bücherei</title>
@@ -13,17 +13,34 @@
 <body class="body">
     {% block header %}
         <header class="header">
-            <div class="navbar">
-                <div class="navbar__logo">
-                    <a href="{{ url_for('index') }}"><img class="srh_logo" src="/static/img/srh_logo.png" alt="srh logo"></a>
-                    <a class="link__no_dec srh_link" href="{{ url_for('index') }}">Bücherei</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="/"><img class="srh_logo" src="/static/img/srh_logo.png" alt="srh logo" width="30" height="24"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/">Bücherei</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('nutzer') }}">Nutzer</a>
+                    </li>
+                      <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('buch') }}">Buch</a>
+                    </li>
+                      <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('ausleih') }}">Ausleih</a>
+                    </li>
+                  </ul>
+                  <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success" name="search" type="submit">Search</button>
+                  </form>
                 </div>
-                <div class="navbar__links">
-                    <a class="link__no_dec navbar__links_link" href="{{ url_for('nutzer') }}">Nutzer</a>
-                    <a class="link__no_dec navbar__links_link" href="{{ url_for('buch') }}">Buch</a>
-                    <a class="link__no_dec navbar__links_link" href="{{ url_for('ausleih') }}">Ausleih</a>
-                </div>
-            </div>
+              </div>
+            </nav>
         </header>
     {% endblock %}
     {% block content %}

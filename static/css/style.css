@@ -52,8 +52,9 @@
 
 .navbar__logo {
     display: flex;
-    justify-content: center;
-    max-height: 100%;
+    justify-content: flex-start;
+    max-height: 150%;
+    margin-bottom: 10vh;
 }
 
 .srh_link {
@@ -63,6 +64,7 @@
     margin-top: 6px;
     align-self: center;
     color: #DF4807;
+    text-align: start;
 }
 
 .link__no_dec {
@@ -86,4 +88,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.srh_logo_link {
+    max-width: 15%;
+    max-height: 100%;
+}
+
+.nutzer__table_row {
+    vertical-align: middle;
 }

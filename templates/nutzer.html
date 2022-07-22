@@ -4,7 +4,6 @@
 <form method="post">
     <table  class="table table-striped">
         <tr>
-            <th>#</th>
             <th>AusweisID</th>
             <th>Vorname</th>
             <th>Nachname</th>
@@ -14,16 +13,15 @@
         </tr>
         {% for user in users %}
 
-        <tr>
-            <td>{{ loop.index + pagination.skip }}</td>
+        <tr class="nutzer__table_row">
             <td>{{ user.ausweisID }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.nachname }}</td>
             <td>{{ user.strasse }}</td>
             <td>{{ user.plz }}</td>
             <td>
-                <input class="btn btn-primary" name="action" type="submit" value="Edit">
-                <input class="btn btn-primary" name="action" type="submit" value="Delete">
+                <input class="btn btn-warning" name="action" type="submit" value="Edit">
+                <input class="btn btn-danger" name="action" type="submit" value="Delete">
                 <input type="hidden" name="id" value="{{ user.ausweisID }}">
             </td>
         </tr>

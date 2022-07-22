@@ -98,6 +98,19 @@ class Ausleihe (base):
 #
 #     def __init__(self, autorid, isbn):
 #         self.autorid = autorid
+
+
+
+
+
+
+
+
+
+
+
+
+
 #         self.isbn = isbn
 
 

@@ -1,0 +1,11 @@
+<div class="navbar">
+                <div class="navbar__logo">
+                    <a class="srh_logo_link" href="{{ url_for('index') }}"><img class="srh_logo" src="/static/img/srh_logo.png" alt="srh logo"></a>
+                    <a class="link__no_dec srh_link" href="{{ url_for('index') }}">Bücherei</a>
+                </div>
+                <div class="navbar__links">
+                    <a class="link__no_dec navbar__links_link" href="{{ url_for('nutzer') }}">Nutzer</a>
+                    <a class="link__no_dec navbar__links_link" href="{{ url_for('buch') }}">Buch</a>
+                    <a class="link__no_dec navbar__links_link" href="{{ url_for('ausleih') }}">Ausleih</a>
+                </div>
+            </div>
